@@ -1,18 +1,28 @@
 import org.sql2o.Connection;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Animal {
 //    encapsulation starts here, private access modifiers
     private String animalName;
     private Integer animalId;
+    private int id;
 //constructor generated to instantiate the animal class
-    public Animal(String animalName, Integer animalId) {
+    public Animal(String animalName, Integer animalId, int id) {
         this.animalName = animalName;
         this.animalId = animalId;
+        this.id=id;
     }
-//accessors and mutators to the protected data types declared above.
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    //accessors and mutators to the protected data types declared above.
     public String getAnimalName() {
         return animalName;
     }
@@ -41,20 +51,25 @@ public class Animal {
     public int hashCode() {
         return Objects.hash(animalName, animalId);
     }
+//    gathering id-assigned outputs
     public void save() {
         try(Connection con = DB.sql2o.open()) {
             String sql = "INSERT INTO animals (animalName, animalId) VALUES (:animalName, :animalId)";
-            con.createQuery(sql)
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.animalName)
                     .addParameter(String.valueOf(animalId), this.animalId)
-                    .addParameter("animalName", this.animalName)
-                    .executeUpdate();
+                    .executeUpdate()
+                    .getKey();
         }
     }
-//    implementing all() method to facilitate the execution of save() so that all db entries can be returned successfully
-    public static List<Animal> all() {
-        String sql = "SELECT * FROM animals";
-        try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animal.class);
-        }
+//    returning animals based on their ids
+public static Animal find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+        String sql = "SELECT * FROM animals where id=:id";
+        Animal animal = con.createQuery(sql)
+                .addParameter("id", id)
+                .executeAndFetchFirst(Animal.class);
+        return animal;
     }
+}
 }
