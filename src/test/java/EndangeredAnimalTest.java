@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EndangeredAnimalTest {
 
@@ -12,12 +13,13 @@ class EndangeredAnimalTest {
     @AfterEach
     void tearDown() {
     }
+//    db rule initiation
     @Rule
     public DatabaseRule database = new DatabaseRule();
 
     @Test
     public void monster_instantiatesCorrectly_true() {
-        Monster testMonster = new Monster("Bubbles", 1);
-        assertEquals(true, testMonster instanceof Monster);
+        EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Rhino", 1);
+        assertEquals(true, testEndangeredAnimal instanceof EndangeredAnimal);
     }
 }
