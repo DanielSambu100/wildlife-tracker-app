@@ -1,4 +1,4 @@
-# Wildlife-Tracker
+# wildlife-tracker-app
 A wildlife tracking app to track both animal and sighting categories by the forest rangers. 
 
 ## Description
@@ -24,7 +24,7 @@ Handlebars Template Engine
 ## Setup Installations Requirements
 To run the application, in your terminal:
 1. Clone or download the Repository
-2. cd into directory then run `cd Wildlife-Tracker`
+2. cd into directory then run `cd wildlife-tracker-app`
 3. Rebuild the Project Using Intellij IDEA or your favorite IDE.
 4. Open terminal command line then navigate to the root folder of the application.
 5. Run `gradle run` command.
