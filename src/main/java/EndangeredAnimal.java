@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class EndangeredAnimal {
     private String endangeredName;
     private  int animalId;
@@ -51,5 +53,18 @@ public class EndangeredAnimal {
 
     public void setHealth(String health) {
         this.health = health;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EndangeredAnimal that = (EndangeredAnimal) o;
+        return animalId == that.animalId && endId == that.endId && age == that.age && Objects.equals(endangeredName, that.endangeredName) && Objects.equals(health, that.health);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(endangeredName, animalId, endId, age, health);
     }
 }
