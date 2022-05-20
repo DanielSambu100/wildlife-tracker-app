@@ -8,7 +8,7 @@ public class Animal {
     private Integer animalId;
     private int id;
 //constructor generated to instantiate the animal class
-    public Animal(String animalName, Integer animalId, int id) {
+    public Animal(String animalName, Integer animalId) {
         this.animalName = animalName;
         this.animalId = animalId;
         this.id=id;
